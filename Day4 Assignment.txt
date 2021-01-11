@@ -1,0 +1,164 @@
+Question 1
+Write a function “insert_any()” for inserting a node at any given position of the linked list. Assume
+position starts at 0.
+Question 2
+Write a function “delete_beg()” for deleting a node from the beginning of the linked list.
+Question 3
+Write a function “delete_end()” for deleting a node from the end of the linked list.
+
+Answer:-
+
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+struct node
+{int info;
+struct node *next;
+}*start, *temp;
+
+void insert_beg(int);
+void insert_end(int);
+void insert_spe(int,int);
+void delete_beg();
+void delete_end();
+void delete_spe(int);
+void display();
+
+void main()
+{clrscr();
+ start=NULL;
+ int item,choice,location,element,position;
+ cout<<endl<<"Insert & Delete operation in linked list by-Tarun Rawat\n";
+ again:
+ cout<<"\n1.Insert at beg of linked list\t";
+ cout<<"2.Insert at end of linked list\n";
+ cout<<"3.Insert at specific location\t";
+ cout<<"4.Delete from beginning of List \n5.delete from end of the list \t6.Delete from specific location of List\n7.Display linked list\t8.Exit\n";
+ cout<<"Enter choice : ";
+ cin>>choice;
+ switch(choice)
+ {case 1:cout<<"Enter item to insert : ";
+       cin>>item;
+       insert_beg(item);
+       goto again;
+ case 2:cout<<"Enter item to insert : ";
+       cin>>item;
+       insert_end(item);
+       goto again;
+ case 3:cout<<"Enter location to insert : ";
+       cin>>location;
+       cout<<"Enter item to insert : ";
+       cin>>item;
+       insert_spe(item,location);
+       goto again;
+ case 4:delete_beg();
+       goto again;
+ case 5:delete_end();
+       goto again;
+ case 6:cout<<"Enter the location to delete : ";
+       cin>>location;
+       delete_spe(location);
+       goto again;
+ case 7:cout<<"\nInserted item = ";
+       display();
+       goto again;
+ case 8 :cout<<"\nTHANK YOU";
+ default:break;
+ }
+ getch();
+}
+
+void insert_beg(int item)
+{temp=(node*)malloc(sizeof(node));
+temp->info=item;
+temp->next=start;
+start=temp;
+}
+
+void insert_end(int item)
+{temp=(node*)malloc(sizeof(node));
+temp->info=item;
+temp->next=NULL;
+node* current=start;
+while(current->next!=NULL)
+    {current=current->next;
+    }
+current->next=temp;
+}
+
+void insert_spe(int item,int location)
+{temp=(node*)malloc(sizeof(node));
+temp->info=item;
+node* current=start;
+int count=1;
+while (count <location-1)
+    {current=current->next;
+     count=count+1;
+    }
+temp->next=current->next;
+current->next=temp;
+}
+
+void delete_beg()
+{temp=start;
+start=start->next;
+free(temp);
+}
+
+void delete_end()
+{temp=start;
+node* current;
+while(temp->next!=NULL)
+{
+current=temp;
+temp=temp->next;
+}
+current->next=NULL;
+free(temp);
+}
+
+void delete_spe(int location)
+{node* current;
+temp=start;
+int count=1;
+while(count<=location-1)
+{current=temp;
+temp=temp->next;
+count=count+1;
+}
+current->next=temp->next;
+free(temp);
+}
+
+void display()
+{temp=start;
+while(temp!=NULL)
+{cout<<temp->info<<" ";
+temp=temp->next;
+}
+cout<<"\n";
+
+}
+
+
+
+
+Question 5:-
+Write the algorithm/function for Ternary Search.
+
+Answer:-
+
+Ternary search is a divide and conquer algorithm that can be used to find an element in an array. It is similar to binary search where we divide the array into two parts but in this algorithm, we divide the given array into three parts and determine which has the key (searched element). We can divide the array into three parts by taking mid1 and mid2 which can be calculated as shown below. Initially, l and r will be equal to 0 and n-1 respectively, where n is the length of the array. 
+
+mid1 = l + (r-l)/3 
+mid2 = r – (r-l)/3 
+
+Note: Array needs to be sorted to perform ternary search on it.
+
+Steps to perform Ternary Search: 
+
+1).First, we compare the key with the element at mid1. If found equal, we return mid1.
+2.)If not, then we compare the key with the element at mid2. If found equal, we return mid2.
+3.)If not, then we check whether the key is less than the element at mid1. If yes, then recur to the first part.
+4.)If not, then we check whether the key is greater than the element at mid2. If yes, then recur to the third part.
+5.)If not, then we recur to the second (middle) part.
