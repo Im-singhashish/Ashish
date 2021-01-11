@@ -1,0 +1,67 @@
+Question 1:-
+Write a program to print the following pattern
+1
+2*2
+3*3*3
+4*4*4*4
+
+Answer:-
+
+
+#include<stdio.h>
+#include<conio.h>
+ 
+void main() 
+{
+	int i,j;
+	for (i=1;i<=4;i++) 
+        {
+		for (j=1;j<=i;j++) 
+                {
+			if(j<i) 
+			        printf("%d*",i);
+                        else 
+			        printf("%d",i);
+		}
+		printf(" \n");
+	}
+getch();
+}
+
+
+ Question 2:-
+Write a program to print the following pattern
+1
+01
+101
+0101
+10101
+
+ Answer:
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+ int i,j,n;
+ clrscr();
+ printf("\n Enter the value of n:");
+ scanf("%d",&n);
+ for(i=0;i<=n;i++)
+ {
+  for(j=1;j<i;j++)
+  {
+   if((i+j)%2==0)
+   {
+  printf("\t 0");
+   }
+ else
+ {
+  printf("\t 1");
+ }
+  }
+ printf("\n");
+ }
+getch();
+
+}
