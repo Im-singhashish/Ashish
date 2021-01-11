@@ -1,0 +1,242 @@
+Question 1:-
+Write a program implementing insert, delete and display operation of Circular Queue.
+
+Answer:-#include<stdio.h>
+# define MAX 5
+int cqueue_arr[MAX];
+int front = -1;
+int rear = -1;
+void insert(int item)
+{
+if((front == 0 && rear == MAX-1) || (front == rear+1))
+{
+printf("Queue Overflow n");
+return;
+}
+if(front == -1)
+{
+front = 0;
+rear = 0;
+}
+else
+{
+if(rear == MAX-1)
+rear = 0;
+else
+rear = rear+1;
+}
+cqueue_arr[rear] = item ;
+}
+void deletion()
+{
+if(front == -1)
+{
+printf("Queue Underflown");
+return ;
+}
+printf("Element deleted from queue is : %dn",cqueue_arr[front]);
+if(front == rear)
+{
+front = -1;
+rear=-1;
+}
+else
+{
+if(front == MAX-1)
+front = 0;
+else
+front = front+1;
+}
+}
+void display()
+{
+int front_pos = front,rear_pos = rear;
+if(front == -1)
+{
+printf("Queue is emptyn");
+return;
+}
+printf("Queue elements :n");
+if( front_pos <= rear_pos )
+while(front_pos <= rear_pos)
+{
+printf("%d ",cqueue_arr[front_pos]);
+front_pos++;
+}
+else
+{
+while(front_pos <= MAX-1)
+{
+printf("%d ",cqueue_arr[front_pos])
+front_pos++;
+}
+front_pos = 0;
+while(front_pos <= rear_pos)
+{
+printf("%d ",cqueue_arr[front_pos]);
+front_pos++;
+}
+}
+printf("n");
+}
+int main()
+{
+int choice,item;
+do
+{
+printf("1.Insertn");
+printf("2.Deleten");
+printf("3.Displayn");
+printf("4.Quitn");
+printf("Enter your choice : ");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1 :
+printf("Input the element for insertion in queue : ");
+scanf("%d", &item);
+insert(item);
+break;
+case 2 :
+deletion();
+break;
+case 3:
+display();
+break;
+case 4:
+break;
+default:
+printf("Wrong choicen");
+}
+}while(choice!=4);
+return 0;
+}
+
+
+Question 3:-
+Implement push, pop and find the minimum element in a stack in O(1) time complexity.
+
+Answer:-
+// C# program to implement a stack  
+// that supports getMinimum() in O(1)  
+// time and O(1) extra space. 
+using System; 
+using System.Collections; 
+  
+// A user defined stack that supports  
+// getMin() in addition to Push() and Pop() 
+public class MyStack 
+{ 
+    public Stack s; 
+    public int minEle; 
+  
+    // Constructor 
+    public MyStack()  
+    { 
+        s = new Stack(); 
+    } 
+  
+    // Prints minimum element of MyStack 
+    public void getMin() 
+    { 
+        // Get the minimum number  
+        // in the entire stack 
+        if (s.Count==0) 
+            Console.WriteLine("Stack is empty"); 
+  
+        // variable minEle stores the minimum  
+        // element in the stack. 
+        else
+            Console.WriteLine("Minimum Element in the " + 
+                            " stack is: " + minEle); 
+    } 
+  
+    // prints top element of MyStack 
+    public void Peek() 
+    { 
+        if (s.Count==0) 
+        { 
+            Console.WriteLine("Stack is empty "); 
+            return; 
+        } 
+  
+        int t =(int)s.Peek(); // Top element. 
+  
+        Console.Write("Top Most Element is: "); 
+  
+        // If t < minEle means minEle stores 
+        // value of t. 
+        if (t < minEle) 
+            Console.WriteLine(minEle); 
+        else
+            Console.WriteLine(t); 
+    } 
+  
+    // Removes the top element from MyStack 
+    public void Pop() 
+    { 
+        if (s.Count==0) 
+        { 
+            Console.WriteLine("Stack is empty"); 
+            return; 
+        } 
+  
+        Console.Write("Top Most Element Removed: "); 
+        int t = (int)s.Pop(); 
+  
+        // Minimum will change as the minimum element 
+        // of the stack is being removed. 
+        if (t < minEle) 
+        { 
+            Console.WriteLine(minEle); 
+            minEle = 2*minEle - t; 
+        } 
+  
+        else
+            Console.WriteLine(t); 
+    } 
+  
+    // Insert new number into MyStack 
+    public void Push(int x) 
+    { 
+        if (s.Count==0) 
+        { 
+            minEle = x; 
+            s.Push(x); 
+            Console.WriteLine("Number Inserted: " + x); 
+            return; 
+        } 
+  
+        // If new number is less than original minEle 
+        if (x < minEle) 
+        { 
+            s.Push(2 * x - minEle); 
+            minEle = x; 
+        } 
+  
+        else
+            s.Push(x); 
+  
+        Console.WriteLine("Number Inserted: " + x); 
+    } 
+} 
+  
+// Driver Code 
+public class main 
+{ 
+    public static void Main(String []args) 
+    { 
+        MyStack s = new MyStack(); 
+        s.Push(3); 
+        s.Push(5); 
+        s.getMin(); 
+        s.Push(2); 
+        s.Push(1); 
+        s.getMin(); 
+        s.Pop(); 
+        s.getMin(); 
+        s.Pop(); 
+        s.Peek(); 
+    } 
+} 
+  
